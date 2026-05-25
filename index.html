@@ -1,0 +1,397 @@
+<!DOCTYPE html>
+<html lang="km">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>កម្មវិធីកត់ត្រាសិស្សចុះឈ្មោះចូលរៀន</title>
+    <!-- ប្រើប្រាស់ Tailwind CSS សម្រាប់រចនារូបរាង -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <!-- ប្រើប្រាស់ Font ខ្មែរ -->
+    <link href="https://fonts.googleapis.com/css2?family=Battambang:wght@400;700&family=Moul&display=swap" rel="stylesheet">
+    <style>
+        body {
+            font-family: 'Battambang', sans-serif;
+            background-color: #f3f4f6;
+        }
+        .title-font {
+            font-family: 'Moul', cursive;
+        }
+    </style>
+</head>
+<body class="p-4 md:p-8">
+
+    <div class="max-w-6xl mx-auto">
+        <!-- ផ្នែកខាងលើ៖ ចំណងជើង -->
+        <header class="text-center mb-8">
+            <h1 class="text-2xl md:text-4xl text-blue-700 title-font mb-2">ប្រព័ន្ធគ្រប់គ្រងការចុះឈ្មោះសិស្ស</h1>
+            <p class="text-gray-600">ងាយស្រួលកត់ត្រា និងរក្សាទុកទិន្នន័យសិស្ស</p>
+        </header>
+
+        <div class="grid grid-cols-1 lg:grid-cols-3 gap-6">
+            
+            <!-- ផ្នែកខាងឆ្វេង៖ ហ្វមបញ្ចូលទិន្នន័យ (Input & Validation) -->
+            <div class="bg-white p-6 rounded-xl shadow-md h-fit">
+                <h2 class="text-xl font-bold text-gray-800 mb-4 border-b pb-2">បញ្ចូលព័ត៌មានសិស្សថ្មី</h2>
+                
+                <form id="studentForm" class="space-y-4">
+                    <div>
+                        <label class="block text-sm font-medium text-gray-700 mb-1">ឈ្មោះសិស្សពេញ <span class="text-red-500">*</span></label>
+                        <input type="text" id="studentName" required class="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:outline-none" placeholder="ឧ. សុខ សាន្ត">
+                    </div>
+
+                    <div class="grid grid-cols-2 gap-4">
+                        <div>
+                            <label class="block text-sm font-medium text-gray-700 mb-1">ភេទ</label>
+                            <select id="gender" class="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:outline-none">
+                                <option value="ប្រុស">ប្រុស</option>
+                                <option value="ស្រី">ស្រី</option>
+                            </select>
+                        </div>
+                        <div>
+                            <label class="block text-sm font-medium text-gray-700 mb-1">ថ្ងៃខែចុះឈ្មោះ <span class="text-red-500">*</span></label>
+                            <input type="date" id="enrollDate" required class="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:outline-none">
+                        </div>
+                    </div>
+
+                    <!-- ផ្នែកជ្រើសរើសមុខវិជ្ជា និងតម្លៃ (អាចរើសច្រើនមុខបញ្ចូលគ្នា) -->
+                    <div class="bg-blue-50 p-4 rounded-lg border border-blue-100 shadow-inner">
+                        <label class="block text-sm font-bold text-gray-800 mb-2">ថ្នាក់រៀន / វគ្គ និងតម្លៃ <span class="text-red-500">*</span></label>
+                        <div class="flex flex-col gap-2 mb-4" id="subjectContainer">
+                            <!-- គណិតវិទ្យា -->
+                            <div class="flex items-center justify-between bg-white p-2 rounded border hover:border-blue-400 transition">
+                                <label class="flex items-center gap-3 cursor-pointer flex-1">
+                                    <input type="checkbox" name="subject" value="គណិតវិទ្យា" class="subject-checkbox w-5 h-5 text-blue-600 rounded focus:ring-blue-500">
+                                    <span class="text-gray-700 font-medium">គណិតវិទ្យា</span>
+                                </label>
+                                <div class="flex items-center gap-1">
+                                    <span class="text-gray-500 font-bold">$</span>
+                                    <input type="number" step="any" class="subject-price w-24 px-2 py-1 border border-gray-300 rounded focus:outline-none focus:border-blue-500 disabled:bg-gray-100 disabled:cursor-not-allowed" placeholder="តម្លៃ" disabled>
+                                </div>
+                            </div>
+                            <!-- គីមីវិទ្យា -->
+                            <div class="flex items-center justify-between bg-white p-2 rounded border hover:border-blue-400 transition">
+                                <label class="flex items-center gap-3 cursor-pointer flex-1">
+                                    <input type="checkbox" name="subject" value="គីមីវិទ្យា" class="subject-checkbox w-5 h-5 text-blue-600 rounded focus:ring-blue-500">
+                                    <span class="text-gray-700 font-medium">គីមីវិទ្យា</span>
+                                </label>
+                                <div class="flex items-center gap-1">
+                                    <span class="text-gray-500 font-bold">$</span>
+                                    <input type="number" step="any" class="subject-price w-24 px-2 py-1 border border-gray-300 rounded focus:outline-none focus:border-blue-500 disabled:bg-gray-100 disabled:cursor-not-allowed" placeholder="តម្លៃ" disabled>
+                                </div>
+                            </div>
+                            <!-- ជីវៈវិទ្យា -->
+                            <div class="flex items-center justify-between bg-white p-2 rounded border hover:border-blue-400 transition">
+                                <label class="flex items-center gap-3 cursor-pointer flex-1">
+                                    <input type="checkbox" name="subject" value="ជីវៈវិទ្យា" class="subject-checkbox w-5 h-5 text-blue-600 rounded focus:ring-blue-500">
+                                    <span class="text-gray-700 font-medium">ជីវៈវិទ្យា</span>
+                                </label>
+                                <div class="flex items-center gap-1">
+                                    <span class="text-gray-500 font-bold">$</span>
+                                    <input type="number" step="any" class="subject-price w-24 px-2 py-1 border border-gray-300 rounded focus:outline-none focus:border-blue-500 disabled:bg-gray-100 disabled:cursor-not-allowed" placeholder="តម្លៃ" disabled>
+                                </div>
+                            </div>
+                        </div>
+                        
+                        <div>
+                            <label class="block text-sm font-bold text-gray-800 mb-1">តម្លៃបង់សរុបរួម ($) <span class="text-red-500">*</span></label>
+                            <input type="number" step="any" id="price" required class="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:outline-none bg-gray-100 font-bold text-blue-700" placeholder="តម្លៃសរុបនឹងលោតដោយស្វ័យប្រវត្តិ" readonly>
+                            <p class="text-xs text-gray-500 mt-1">* ទឹកប្រាក់សរុបបូកបញ្ចូលគ្នាដោយស្វ័យប្រវត្តិពីមុខវិជ្ជាខាងលើ</p>
+                        </div>
+                    </div>
+
+                    <button type="submit" class="w-full bg-blue-600 hover:bg-blue-700 text-white font-bold py-3 px-4 rounded-lg transition duration-200 shadow-md">
+                        កត់ត្រាចូលប្រព័ន្ធ
+                    </button>
+                </form>
+            </div>
+
+            <!-- ផ្នែកខាងស្តាំ៖ តារាងទិន្នន័យ (Recording & Output) -->
+            <div class="bg-white p-6 rounded-xl shadow-md lg:col-span-2">
+                <div class="flex justify-between items-center mb-4 border-b pb-2">
+                    <h2 class="text-xl font-bold text-gray-800">បញ្ជីឈ្មោះសិស្សបានចុះឈ្មោះ</h2>
+                    <div class="flex gap-2 flex-wrap justify-end">
+                        <span class="bg-green-100 text-green-800 text-sm font-bold px-3 py-1 rounded-full">ចំណូលសរុប៖ $<span id="totalRevenue">0</span></span>
+                        <span class="bg-blue-100 text-blue-800 text-sm font-bold px-3 py-1 rounded-full">សរុប៖ <span id="totalStudents">0</span> នាក់</span>
+                    </div>
+                </div>
+                
+                <!-- កន្លែងបង្ហាញតារាងដែលបែងចែកតាមថ្នាក់ -->
+                <div id="tablesContainer" class="space-y-6">
+                    <!-- តារាងនីមួយៗនឹងបង្ហាញនៅទីនេះតាមរយៈ JavaScript -->
+                </div>
+                
+                <!-- ស្ថានភាពពេលគ្មានទិន្នន័យ -->
+                <div id="emptyState" class="text-center py-10 text-gray-500">
+                    <svg class="mx-auto h-12 w-12 text-gray-400 mb-3" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 4v16m8-8H4" />
+                    </svg>
+                    <p>មិនទាន់មានទិន្នន័យសិស្សចុះឈ្មោះនៅឡើយទេ។</p>
+                </div>
+            </div>
+
+        </div>
+
+        <!-- ផ្នែកខាងក្រោម៖ ឈ្មោះអ្នករៀបចំ -->
+        <footer class="text-center mt-10 mb-4 text-gray-500 text-sm border-t pt-4">
+            <p>រៀបចំដោយ៖ <span class="font-bold text-blue-700 text-base">វ៉ាន សុទ្ធាវ័ន្ត</span></p>
+        </footer>
+
+    </div>
+
+    <!-- JavaScript សម្រាប់ដំណើរការ Logic កម្មវិធី -->
+    <script>
+        // កំណត់ថ្ងៃខែបច្ចុប្បន្នជា Default
+        document.getElementById('enrollDate').valueAsDate = new Date();
+
+        // ជំហានទី៣៖ ការរក្សាទុកទិន្នន័យ (ទាញចេញពី Local Storage ប្រសិនបើមាន)
+        let students = JSON.parse(localStorage.getItem('registeredStudents')) || [];
+
+        const form = document.getElementById('studentForm');
+        const tablesContainer = document.getElementById('tablesContainer');
+        const emptyState = document.getElementById('emptyState');
+        const totalStudentsEl = document.getElementById('totalStudents');
+        const totalRevenueEl = document.getElementById('totalRevenue');
+
+        // ការគណនាតម្លៃសរុបដោយស្វ័យប្រវត្តិ
+        function calculateTotal() {
+            let total = 0;
+            document.querySelectorAll('.subject-checkbox').forEach(cb => {
+                if (cb.checked) {
+                    const priceInput = cb.closest('.bg-white').querySelector('.subject-price');
+                    total += parseFloat(priceInput.value) || 0;
+                }
+            });
+            document.getElementById('price').value = total > 0 ? total : '';
+        }
+
+        // បើក/បិទ ប្រអប់តម្លៃតាមមុខវិជ្ជា
+        document.querySelectorAll('.subject-checkbox').forEach(cb => {
+            cb.addEventListener('change', function() {
+                const priceInput = this.closest('.bg-white').querySelector('.subject-price');
+                priceInput.disabled = !this.checked;
+                if (!this.checked) {
+                    priceInput.value = ''; // លុបតម្លៃចោលពេលដោះធីក
+                } else {
+                    priceInput.focus(); // ដាក់ cursor ឲ្យវាយតម្លៃភ្លាមៗពេលធីក
+                }
+                calculateTotal();
+            });
+        });
+
+        // គណនាសរុបរាល់ពេលវាយបញ្ចូលតម្លៃមុខវិជ្ជានីមួយៗ
+        document.querySelectorAll('.subject-price').forEach(input => {
+            input.addEventListener('input', calculateTotal);
+        });
+
+        // អនុវត្តមុខងារបង្ហាញទិន្នន័យចូលតារាង (ជំហានទី៤៖ Output)
+        function renderTable() {
+            tablesContainer.innerHTML = '';
+            
+            if (students.length === 0) {
+                emptyState.style.display = 'block';
+                totalStudentsEl.innerText = '0';
+                totalRevenueEl.innerText = '0';
+                return;
+            }
+
+            emptyState.style.display = 'none';
+            totalStudentsEl.innerText = students.length;
+
+            // ប្រមូលផ្តុំទិន្នន័យសិស្សទៅតាមមុខវិជ្ជា (Grouping by Subject)
+            const groupedStudents = {};
+            let grandTotal = 0;
+
+            students.forEach((student, index) => {
+                // បូកប្រាក់ចំណូលសរុបទាំងអស់
+                if(student.price) {
+                    grandTotal += parseFloat(student.price) || 0;
+                }
+
+                // បែងចែកសិស្សចូលទៅតាមមុខវិជ្ជានីមួយៗដែលគាត់បានរើស
+                if (student.subjects && student.subjects.length > 0) {
+                    student.subjects.forEach(subj => {
+                        if (!groupedStudents[subj.name]) {
+                            groupedStudents[subj.name] = { list: [], totalAmount: 0 };
+                        }
+                        groupedStudents[subj.name].list.push({ ...student, originalIndex: index, displayPrice: subj.price });
+                        groupedStudents[subj.name].totalAmount += subj.price;
+                    });
+                } else if (student.grade) {
+                    // សម្រាប់ទិន្នន័យចាស់ដែលអត់ទាន់មាន subjects array
+                    const fallbackSubjects = ['គណិតវិទ្យា', 'គីមីវិទ្យា', 'ជីវៈវិទ្យា'];
+                    let isFallback = false;
+                    fallbackSubjects.forEach(subj => {
+                        if (student.grade.includes(subj)) {
+                            isFallback = true;
+                            if (!groupedStudents[subj]) groupedStudents[subj] = { list: [], totalAmount: 0 };
+                            groupedStudents[subj].list.push({ ...student, originalIndex: index, displayPrice: null });
+                        }
+                    });
+                    
+                    if(!isFallback) {
+                        if (!groupedStudents[student.grade]) groupedStudents[student.grade] = { list: [], totalAmount: 0 };
+                        groupedStudents[student.grade].list.push({ ...student, originalIndex: index, displayPrice: student.price });
+                        groupedStudents[student.grade].totalAmount += parseFloat(student.price) || 0;
+                    }
+                }
+            });
+
+            totalRevenueEl.innerText = grandTotal.toFixed(2);
+
+            // បង្កើតតារាងសម្រាប់មុខវិជ្ជានីមួយៗ
+            for (const subject in groupedStudents) {
+                const groupData = groupedStudents[subject];
+                const group = groupData.list;
+                const classTotal = groupData.totalAmount;
+                
+                const groupDiv = document.createElement('div');
+                groupDiv.className = 'bg-white border border-blue-100 rounded-lg overflow-hidden shadow-sm';
+                
+                // ចំណងជើងថ្នាក់ (Header នៃក្រុមនីមួយៗ)
+                const groupHeader = document.createElement('div');
+                groupHeader.className = 'bg-blue-50 px-4 py-3 border-b border-blue-100 flex justify-between items-center';
+                groupHeader.innerHTML = `
+                    <h3 class="font-bold text-blue-800 flex items-center gap-2">
+                        <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 11H5m14 0a2 2 0 012 2v6a2 2 0 01-2 2H5a2 2 0 01-2-2v-6a2 2 0 012-2m14 0V9a2 2 0 00-2-2M5 11V9a2 2 0 002-2m0 0V5a2 2 0 012-2h6a2 2 0 012 2v2M7 7h10"></path></svg>
+                        ថ្នាក់ / វគ្គ៖ ${subject}
+                    </h3>
+                    <div class="flex gap-2">
+                        <span class="bg-green-100 text-green-800 text-xs font-bold px-2 py-1 rounded-full text-center">សរុប៖ $${classTotal.toFixed(2)}</span>
+                        <span class="bg-blue-200 text-blue-800 text-xs font-bold px-2 py-1 rounded-full text-center min-w-[30px]">${group.length} នាក់</span>
+                    </div>
+                `;
+                groupDiv.appendChild(groupHeader);
+
+                // តារាងសម្រាប់ថ្នាក់នោះ
+                const tableWrapper = document.createElement('div');
+                tableWrapper.className = 'overflow-x-auto';
+                
+                let tableHTML = `
+                    <table class="w-full text-left border-collapse text-sm">
+                        <thead>
+                            <tr class="bg-gray-50 text-gray-600">
+                                <th class="p-3 border-b w-12 text-center">ល.រ</th>
+                                <th class="p-3 border-b">ឈ្មោះសិស្ស</th>
+                                <th class="p-3 border-b">ភេទ</th>
+                                <th class="p-3 border-b">តម្លៃ (មុខវិជ្ជានេះ)</th>
+                                <th class="p-3 border-b">ថ្ងៃចុះឈ្មោះ</th>
+                                <th class="p-3 border-b text-center">សកម្មភាព</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                `;
+
+                group.forEach((student, idx) => {
+                    const dateObj = new Date(student.date);
+                    const formattedDate = dateObj.toLocaleDateString('en-GB'); 
+                    
+                    // បង្ហាញតម្លៃដាច់ដោយឡែក
+                    let priceToShow = student.displayPrice !== null && student.displayPrice !== undefined 
+                                        ? '$' + student.displayPrice 
+                                        : (student.price ? '$' + student.price : '-');
+
+                    tableHTML += `
+                        <tr class="border-b hover:bg-gray-50 transition duration-150">
+                            <td class="p-3 text-center text-gray-500">${idx + 1}</td>
+                            <td class="p-3 font-medium text-gray-800">${student.name}</td>
+                            <td class="p-3">${student.gender}</td>
+                            <td class="p-3 text-green-600 font-bold">${priceToShow}</td>
+                            <td class="p-3 text-gray-500">${formattedDate}</td>
+                            <td class="p-3 text-center">
+                                <button onclick="deleteStudent(${student.originalIndex})" class="text-red-500 hover:text-red-700 hover:bg-red-50 p-1.5 rounded transition" title="លុបទិន្នន័យ">
+                                    <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 7l-.867 12.142A2 2 0 0116.138 21H7.862a2 2 0 01-1.995-1.858L5 7m5 4v6m4-6v6m1-10V4a1 1 0 00-1-1h-4a1 1 0 00-1 1v3M4 7h16"></path></svg>
+                                </button>
+                            </td>
+                        </tr>
+                    `;
+                });
+
+                tableHTML += `</tbody></table>`;
+                tableWrapper.innerHTML = tableHTML;
+                groupDiv.appendChild(tableWrapper);
+                
+                tablesContainer.appendChild(groupDiv);
+            }
+        }
+
+        // ចាប់យកព្រឹត្តិការណ៍ពេលចុច Submit (ជំហានទី១ និងទី២៖ Input & Validation)
+        form.addEventListener('submit', function(e) {
+            e.preventDefault(); // ការពារកុំអោយ Refresh ទំព័រ
+
+            // ប្រមូលទិន្នន័យពី Form
+            const name = document.getElementById('studentName').value.trim();
+            const gender = document.getElementById('gender').value;
+            const price = document.getElementById('price').value.trim();
+            const date = document.getElementById('enrollDate').value;
+
+            // ទាញយកមុខវិជ្ជាដែលបានជ្រើសរើស ព្រមទាំងតម្លៃរបស់វា
+            const subjectCheckboxes = document.querySelectorAll('.subject-checkbox:checked');
+            let selectedSubjects = [];
+            let subjectsList = []; // បន្ថែមអថេរថ្មីសម្រាប់ផ្ទុកទិន្នន័យដាច់ដោយឡែក
+            
+            subjectCheckboxes.forEach(cb => {
+                const priceInput = cb.closest('.bg-white').querySelector('.subject-price');
+                const subjPriceVal = parseFloat(priceInput.value) || 0;
+                const subjPriceStr = priceInput.value ? `$${priceInput.value}` : '$0';
+                
+                selectedSubjects.push(`${cb.value} (${subjPriceStr})`);
+                subjectsList.push({ name: cb.value, price: subjPriceVal }); // រក្សាទុកតម្លៃតាមមុខវិជ្ជា
+            });
+
+            // ផ្ទៀងផ្ទាត់ (Validation តិចតួច)
+            if (!name || !date) {
+                alert("សូមបញ្ចូលព័ត៌មានចាំបាច់អោយបានគ្រប់គ្រាន់!");
+                return;
+            }
+            if (selectedSubjects.length === 0) {
+                alert("សូមជ្រើសរើសមុខវិជ្ជាយ៉ាងហោចណាស់មួយ!");
+                return;
+            }
+
+            // តភ្ជាប់មុខវិជ្ជាបញ្ចូលគ្នា (ឧ. គណិតវិទ្យា + គីមីវិទ្យា)
+            const grade = selectedSubjects.join(' + ');
+
+            // បង្កើត Object សិស្សថ្មី
+            const newStudent = {
+                name: name,
+                gender: gender,
+                grade: grade,
+                subjects: subjectsList, // បញ្ចូលរចនាសម្ព័ន្ធមុខវិជ្ជាថ្មី
+                price: price,
+                date: date
+            };
+
+            // បញ្ចូលទៅក្នុង Array និងរក្សាទុកក្នុង Local Storage
+            students.push(newStudent);
+            localStorage.setItem('registeredStudents', JSON.stringify(students));
+
+            // សម្អាត Form
+            document.getElementById('studentName').value = '';
+            document.getElementById('price').value = '';
+            document.querySelectorAll('.subject-checkbox').forEach(cb => {
+                cb.checked = false;
+                const priceInput = cb.closest('.bg-white').querySelector('.subject-price');
+                priceInput.value = '';
+                priceInput.disabled = true;
+            });
+            document.getElementById('studentName').focus();
+
+            // ធ្វើបច្ចុប្បន្នភាពតារាង
+            renderTable();
+        });
+
+        // មុខងារសម្រាប់លុបទិន្នន័យ
+        function deleteStudent(index) {
+            if(confirm("តើអ្នកពិតជាចង់លុបទិន្នន័យសិស្សនេះមែនទេ?")) {
+                students.splice(index, 1);
+                localStorage.setItem('registeredStudents', JSON.stringify(students));
+                renderTable();
+            }
+        }
+
+        // បង្ហាញទិន្នន័យលើកដំបូងពេលបើកកម្មវិធី
+        renderTable();
+
+    </script>
+</body>
+</html>
